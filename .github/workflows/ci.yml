@@ -13,14 +13,14 @@ jobs:
       matrix:
         include:
           # - os: ubuntu-latest # x64
-          # - os: ubuntu-24.04-arm # arm64
-          - os: macos-latest # arm64
-          - os: macos-13 # x64 
+          - os: ubuntu-24.04-arm # arm64
+          # - os: macos-latest # arm64
+          # - os: macos-13 # x64 
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: 'twesterhout/nixpkgs'
-        ref: 'halide-v19'
+        repository: 'nixos/nixpkgs'
+        ref: 'nixos-unstable'
         fetch-depth: 1
     - uses: DeterminateSystems/nix-installer-action@main
     - uses: cachix/cachix-action@v14
@@ -29,4 +29,4 @@ jobs:
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: Build
       run: |
-        nix build -L .#python3Packages.halide
+        nix build -L .#hello
